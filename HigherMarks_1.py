@@ -47,7 +47,7 @@ st.header("📩 Book a Free Demo Session")
 st.write("An IITian/NITian mentor will call you back to discuss your academic goals.")
 
 # 1. Update this to your real email
-your_email = "your-email@gmail.com" 
+your_email = "vibhuagarwal1998@gmail.com" 
 
 # 2. Define the HTML Form
 # Using inline CSS to ensure it looks good inside the iframe
