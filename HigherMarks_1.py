@@ -86,7 +86,7 @@ if submitted:
             # 1. Resilient Data Loading
             # This ensures we don't crash if the sheet is empty or being updated
             try:
-                existing_data = conn.read(worksheet="Sheet1", ttl=0)
+                existing_data = conn.read(worksheet="Sheet1", ttl="5m")
             except Exception:
                 existing_data = pd.DataFrame(columns=["Timestamp", "Name", "Phone", "Course", "Note"])
 
