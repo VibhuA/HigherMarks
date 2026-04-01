@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_gsheets import GSheetsConnection
 import pandas as pd
 from datetime import datetime
 
@@ -10,17 +9,38 @@ st.set_page_config(
     layout="centered"
 )
 
-# --- Google Sheets Connection ---
-# Make sure your st.secrets contains the [connections.gsheets] section
-conn = st.connection("gsheets", type=GSheetsConnection)
+# --- Custom CSS for a Premium Branding ---
+st.markdown("""
+    <style>
+    .main {
+        background-color: #f9fbfd;
+    }
+    div.stButton > button:first-child {
+        background-color: #ff4b4b;
+        color: white;
+        border-radius: 8px;
+        border: none;
+        height: 3em;
+        width: 100%;
+        font-weight: bold;
+    }
+    .course-card {
+        padding: 1.5rem;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        border: 1px solid #eef2f6;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
 # --- Header Section ---
 st.markdown("# 📈 HigherMarks")
 st.subheader("Elevating Education with Mentors from IITs and NITs")
 st.write("""
-Welcome to **HigherMarks**, where we bridge the gap between classroom learning 
-and competitive excellence. Our mission is to provide top-tier conceptual 
-clarity delivered by India's finest engineering minds.
+At **HigherMarks**, we bridge the gap between classroom learning and competitive excellence. 
+Taught by engineers who have navigated the toughest entrance exams, we focus on 
+conceptual depth for students in the Thane and Mumbai regions.
 """)
 
 st.divider()
@@ -31,98 +51,99 @@ col1, col2 = st.columns([2, 1])
 with col1:
     st.markdown("### 🎓 The HigherMarks Advantage")
     st.write("- **Premium Faculty:** Taught exclusively by **IITians and NITians**.")
-    st.write("- **Concept First:** We don't just teach formulas; we teach the 'why' behind them.")
-    st.write("- **Result Oriented:** Specialized focus on conceptual depth and board patterns.")
+    st.write("- **Personalized Attention:** Limited batch sizes to ensure conceptual clarity.")
+    st.write("- **Concept First:** Moving beyond rote learning to logical problem solving.")
 
 with col2:
-    st.info("**Our Expertise** \n\n Our educators have cleared the toughest exams in the country. We know the path because we've walked it.")
+    st.info("**Our Expertise** \n\n We bring the rigour of IIT Bombay and NIT standards to school-level PCM coaching.")
 
 st.divider()
 
-# --- Curriculum Section ---
+# --- Curriculum Section (Using Pandas for organized display) ---
 st.header("📚 Our Programs")
 
-card1, card2, card3 = st.columns(3)
+# Quick DataFrame to show structured course details if needed
+courses_data = {
+    "Program": ["ICSE (8th-10th)", "CBSE (10th)", "Class 11th Maths"],
+    "Subjects": ["Physics, Chemistry, Maths", "Physics, Chemistry, Maths", "Advanced Mathematics"],
+    "Focus": ["Board Excellence", "Board Mastery & PYQs", "JEE Foundation"]
+}
+df_courses = pd.DataFrame(courses_data)
 
-with card1:
+c1, c2, c3 = st.columns(3)
+
+with c1:
     st.markdown("### **ICSE**")
     st.caption("Grades 8th - 10th")
     st.write("**PCM Focus**")
-    st.write("Comprehensive Physics, Chemistry, and Math with rigorous Board prep.")
+    st.write("Rigorous preparation for ICSE boards with in-depth theory.")
 
-with card2:
+with c2:
     st.markdown("### **CBSE**")
     st.caption("Grade 10th")
     st.write("**PCM Focus**")
-    st.write("Specialized modules for Class 10 Boards, focusing on NCERT and PYQs.")
+    st.write("Specialized NCERT deep-dives and previous year paper analysis.")
 
-with card3:
-    st.markdown("### **Mathematics**")
+with c3:
+    st.markdown("### **Maths**")
     st.caption("Grade 11th")
     st.write("**All Boards**")
-    st.write("Advanced Mathematics for CBSE, ICSE, and State Boards. Building the JEE foundation.")
+    st.write("Transitioning to higher-order thinking for 11th and JEE entrance.")
 
 st.divider()
 
-# --- Lead Generation Form ---
-st.header("📩 Get Started with HigherMarks")
-st.write("Book a free demo session with our expert faculty.")
+# --- Lead Generation via FormSubmit ---
+st.header("📩 Book a Free Demo Session")
+st.write("Submit your details below. An IITian/NITian mentor will call you back within 24 hours.")
 
-with st.form("inquiry_form", clear_on_submit=True):
-    name = st.text_input("Student Name")
-    parent_phone = st.text_input("Parent's Contact Number")
-    course = st.selectbox("Select Interest", [
-        "ICSE PCM (8th-10th)", 
-        "CBSE PCM (10th)", 
-        "Class 11th Maths (All Boards)"
-    ])
-    note = st.text_area("Any specific academic goals or concerns?")
-    
-    submitted = st.form_submit_button("Request Call Back")
+# IMPORTANT: Change this to your actual email address
+your_email = "vibhuagarwal1998@gmail.com" 
 
-if submitted:
-    if name and parent_phone:
-        try:
-            # 1. Resilient Data Loading
-            # This ensures we don't crash if the sheet is empty or being updated
-            try:
-                existing_data = conn.read(worksheet="Sheet1", ttl="5m")
-            except Exception:
-                existing_data = pd.DataFrame(columns=["Timestamp", "Name", "Phone", "Course", "Note"])
+contact_form = f"""
+<form action="https://formsubmit.co/{your_email}" method="POST">
+     <input type="text" name="_honey" style="display:none">
+     
+     <input type="hidden" name="_captcha" value="false">
+     
+     <input type="hidden" name="_next" value="https://highermarks.streamlit.app/">
 
-            # 2. Create New Entry
-            new_lead = pd.DataFrame([{
-                "Timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-                "Name": name,
-                "Phone": parent_phone,
-                "Course": course,
-                "Note": note
-            }])
+     <div style="margin-bottom: 15px;">
+        <label style="font-weight: bold; color: #31333F;">Student Name</label>
+        <input type="text" name="name" placeholder="Enter student name" style="width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 5px;" required>
+     </div>
 
-            # 3. Append and Update
-            # We handle cases where existing_data might be None or empty
-            if existing_data is None or existing_data.empty:
-                updated_df = new_lead
-            else:
-                updated_df = pd.concat([existing_data, new_lead], ignore_index=True)
-            
-            conn.update(worksheet="Sheet1", data=updated_df)
-            
-            st.success("✅ Inquiry sent! A HigherMarks mentor will call you shortly.")
-            st.balloons()
-            
-        except Exception as e:
-            st.error("We are experiencing a high volume of requests. Please try again in a few minutes.")
-            # Log the error for you to see in Streamlit Cloud logs
-            print(f"Error updating sheet: {e}")
-    else:
-        st.warning("Please provide both a name and a contact number so we can reach you.")
+     <div style="margin-bottom: 15px;">
+        <label style="font-weight: bold; color: #31333F;">Parent's Phone Number</label>
+        <input type="tel" name="phone" placeholder="10-digit mobile number" style="width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 5px;" required>
+     </div>
+
+     <div style="margin-bottom: 15px;">
+        <label style="font-weight: bold; color: #31333F;">Course Interest</label>
+        <select name="course" style="width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 5px; background-color: white;">
+            <option value="ICSE 8-10">ICSE PCM (8th-10th)</option>
+            <option value="CBSE 10">CBSE PCM (10th)</option>
+            <option value="Class 11 Maths">Class 11th Maths (All Boards)</option>
+        </select>
+     </div>
+
+     <div style="margin-bottom: 15px;">
+        <label style="font-weight: bold; color: #31333F;">Notes/Goals</label>
+        <textarea name="message" placeholder="e.g. Preparing for JEE, need help in Physics..." style="width: 100%; padding: 12px; border: 1px solid #dcdfe6; border-radius: 5px; height: 80px;"></textarea>
+     </div>
+
+     <button type="submit" style="background-color: #ff4b4b; color: white; border: none; padding: 14px; border-radius: 5px; width: 100%; cursor: pointer; font-size: 16px; font-weight: bold;">
+        Request Call Back
+     </button>
+</form>
+"""
+
+st.markdown(contact_form, unsafe_allow_html=True)
 
 # --- Footer ---
 st.markdown("<br><hr>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center'>
     <p><strong>HigherMarks Academic Center</strong></p>
-    <p style='font-size: 0.8em;'>© 2026 HigherMarks Education | Taught by IITians & NITians</p>
+    <p style='font-size: 0.85em; color: #666;'>Quality Education by IITians & NITians | Serving Thane & Mumbai</p>
 </div>
 """, unsafe_allow_html=True)
