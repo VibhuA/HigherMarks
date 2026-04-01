@@ -1,11 +1,10 @@
 import streamlit as st
 import pandas as pd
 import streamlit.components.v1 as components
-from datetime import datetime
 
 # --- Page Configuration ---
 st.set_page_config(
-    page_title="HigherMarks | IITian & NITian Led Coaching", 
+    page_title="HigherMarks | IITian Led Coaching", 
     page_icon="📈",
     layout="centered"
 )
@@ -15,47 +14,37 @@ st.markdown("# 📈 HigherMarks")
 st.subheader("Elevating Education with Mentors from IITs and NITs")
 st.write("""
 Master PCM with engineers from India's premier institutes. 
-Specialized coaching for ICSE, CBSE, and 11th Grade Mathematics 
-focused on conceptual depth and board excellence.
+Focused on conceptual depth for ICSE, CBSE, and 11th Grade Mathematics.
 """)
 
 st.divider()
 
 # --- Program Overview ---
 st.header("📚 Our Programs")
-col1, col2, col3 = st.columns(3)
-
-with col1:
-    st.markdown("### **ICSE**")
-    st.caption("Grades 8th - 10th")
-    st.write("**PCM Focus**")
-
-with col2:
-    st.markdown("### **CBSE**")
-    st.caption("Grade 10th")
-    st.write("**PCM Focus**")
-
-with col3:
-    st.markdown("### **Maths**")
-    st.caption("Grade 11th")
-    st.write("**All Boards**")
+c1, c2, c3 = st.columns(3)
+with c1:
+    st.markdown("### **ICSE**\nGrades 8-10")
+with c2:
+    st.markdown("### **CBSE**\nGrade 10")
+with c3:
+    st.markdown("### **Maths**\nGrade 11")
 
 st.divider()
 
 # --- Lead Generation Form Section ---
 st.header("📩 Book a Free Demo Session")
-st.write("An IITian/NITian mentor will call you back to discuss your academic goals.")
+st.write("Submit the form below and check your email shortly.")
 
-# 1. Update this to your real email
-your_email = "vibhuagarwal1998@gmail.com" 
+# 1. DOUBLE CHECK THIS EMAIL
+# Make sure there are no typos!
+your_email = "your-email@gmail.com" 
 
-# 2. Define the HTML Form
-# Using inline CSS to ensure it looks good inside the iframe
+# 2. Updated HTML Form (Optimized for Streamlit Components)
 contact_form_html = f"""
-<div style="font-family: sans-serif; padding: 10px;">
-    <form action="https://formsubmit.co/{your_email}" method="POST" target="_top">
+<div style="font-family: sans-serif; padding: 5px;">
+    <form action="https://formsubmit.co/{your_email}" method="POST">
         <input type="hidden" name="_captcha" value="false">
-        <input type="hidden" name="_next" value="https://highermarks.streamlit.app/">
+        <input type="hidden" name="_template" value="table">
         
         <div style="margin-bottom: 15px;">
             <label style="font-weight: bold; display: block; margin-bottom: 5px;">Student Name</label>
@@ -82,16 +71,15 @@ contact_form_html = f"""
         </div>
 
         <button type="submit" style="background-color: #ff4b4b; color: white; border: none; padding: 14px; border-radius: 5px; width: 100%; cursor: pointer; font-size: 16px; font-weight: bold;">
-            Request Call Back
+            Submit Request
         </button>
     </form>
 </div>
 """
 
-# 3. Render the HTML using components.html
-# This prevents the code from showing as text
-components.html(contact_form_html, height=520)
+# 3. Render the HTML
+components.html(contact_form_html, height=550)
 
 # --- Footer ---
 st.divider()
-st.markdown("<center>© 2026 HigherMarks Academic Center | Quality Coaching by IITians & NITians</center>", unsafe_allow_html=True)
+st.markdown("<center>© 2026 HigherMarks | Quality Coaching by IITians & NITians</center>", unsafe_allow_html=True)
