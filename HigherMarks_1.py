@@ -1,50 +1,79 @@
 import streamlit as st
-import pandas as pd
+import pandas as pd  # Added the pandas import
 import streamlit.components.v1 as components
 
-# --- Page Configuration ---
+# Page Configuration
 st.set_page_config(
-    page_title="HigherMarks | IITian Led Coaching", 
+    page_title="HigherMarks | IITian & NITian Led Coaching", 
     page_icon="📈",
     layout="centered"
 )
 
-# --- Header & Branding ---
+# --- Configuration: UPDATE THIS EMAIL ---
+your_email = "your-email@gmail.com" 
+
+# --- Header Section ---
 st.markdown("# 📈 HigherMarks")
 st.subheader("Elevating Education with Mentors from IITs and NITs")
 st.write("""
-Master PCM with engineers from India's premier institutes. 
-Focused on conceptual depth for ICSE, CBSE, and 11th Grade Mathematics.
+Welcome to **HigherMarks**, where we bridge the gap between classroom learning 
+and competitive excellence. Our mission is to provide top-tier conceptual 
+clarity delivered by India's finest engineering minds.
 """)
 
 st.divider()
 
-# --- Program Overview ---
+# --- The Pedigree Section ---
+col1, col2 = st.columns([2, 1])
+
+with col1:
+    st.markdown("### 🎓 The HigherMarks Advantage")
+    st.write("- **Premium Faculty:** Taught exclusively by **IITians and NITians**.")
+    st.write("- **Small Batch Sizes:** Personalized attention for every student.")
+    st.write("- **Result Oriented:** Specialized focus on conceptual depth and board patterns.")
+
+with col2:
+    st.info("**Our Expertise** \n\n Our educators have cleared the toughest exams in the country. We know the path because we've walked it.")
+
+st.divider()
+
+# --- Curriculum Section ---
 st.header("📚 Our Programs")
-c1, c2, c3 = st.columns(3)
-with c1:
-    st.markdown("### **ICSE**\nGrades 8-10")
-with c2:
-    st.markdown("### **CBSE**\nGrade 10")
-with c3:
-    st.markdown("### **Maths**\nGrade 11")
+
+# Creating three columns for a "Card" look
+card1, card2, card3 = st.columns(3)
+
+with card1:
+    st.markdown("### **ICSE**")
+    st.caption("Grades 8th - 10th")
+    st.write("**PCM Focus**")
+    st.write("Physics, Chemistry, and Math covered with rigorous practice for Board prep.")
+
+with card2:
+    st.markdown("### **CBSE**")
+    st.caption("Grade 10th")
+    st.write("**PCM Focus**")
+    st.write("Specialized modules for Class 10 Boards, focusing on NCERT and PYQs.")
+
+with card3:
+    st.markdown("### **Mathematics**")
+    st.caption("Grade 11th")
+    st.write("**All Boards**")
+    st.write("Advanced Mathematics for CBSE, ICSE, and State Boards. Building the JEE foundation.")
 
 st.divider()
 
 # --- Lead Generation Form Section ---
 st.header("📩 Book a Free Demo Session")
-st.write("Submit the form below and check your email shortly.")
+st.write("Submit the form below to connect with our IITian faculty.")
 
-# 1. DOUBLE CHECK THIS EMAIL
-# Make sure there are no typos!
-your_email = "vibhuagarwal1998@gmail.com" 
-
-# 2. Updated HTML Form (Optimized for Streamlit Components)
+# Optimized HTML Form for FormSubmit
 contact_form_html = f"""
-<div style="font-family: sans-serif; padding: 5px;">
+<div style="font-family: sans-serif; padding: 5px; background-color: #f9f9f9; border-radius: 10px; border: 1px solid #eee;">
     <form action="https://formsubmit.co/{your_email}" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
+        <input type="hidden" name="_subject" value="New HigherMarks Demo Request!">
         
         <div style="margin-bottom: 15px;">
             <label style="font-weight: bold; display: block; margin-bottom: 5px;">Student Name</label>
@@ -52,34 +81,45 @@ contact_form_html = f"""
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Parent's Phone Number</label>
-            <input type="tel" name="phone" placeholder="10-digit mobile number" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;" required>
+            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Parent's Email</label>
+            <input type="email" name="email" placeholder="email@example.com" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;" required>
+        </div>
+
+        <div style="display: flex; gap: 10px; margin-bottom: 15px;">
+            <div style="flex: 1;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">Phone Number</label>
+                <input type="tel" name="phone" placeholder="10-digit number" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box;" required>
+            </div>
+            <div style="flex: 1;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">Course Interest</label>
+                <select name="course" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; background-color: white; box-sizing: border-box;">
+                    <option value="ICSE 8-10">ICSE PCM (8th-10th)</option>
+                    <option value="CBSE 10">CBSE PCM (10th)</option>
+                    <option value="Class 11 Maths">Class 11th Maths</option>
+                </select>
+            </div>
         </div>
 
         <div style="margin-bottom: 15px;">
-            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Course Interest</label>
-            <select name="course" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; background-color: white; box-sizing: border-box;">
-                <option value="ICSE 8-10">ICSE PCM (8th-10th)</option>
-                <option value="CBSE 10">CBSE PCM (10th)</option>
-                <option value="Class 11 Maths">Class 11th Maths (All Boards)</option>
-            </select>
-        </div>
-
-        <div style="margin-bottom: 15px;">
-            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Notes/Goals</label>
-            <textarea name="message" placeholder="How can we help?" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; height: 80px; box-sizing: border-box;"></textarea>
+            <label style="font-weight: bold; display: block; margin-bottom: 5px;">Academic Goals / Notes</label>
+            <textarea name="message" placeholder="How can we help the student excel?" style="width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 5px; height: 80px; box-sizing: border-box;"></textarea>
         </div>
 
         <button type="submit" style="background-color: #ff4b4b; color: white; border: none; padding: 14px; border-radius: 5px; width: 100%; cursor: pointer; font-size: 16px; font-weight: bold;">
-            Submit Request
+            Request Call Back & Demo
         </button>
     </form>
 </div>
 """
 
-# 3. Render the HTML
-components.html(contact_form_html, height=550)
+# Render the HTML Component
+components.html(contact_form_html, height=600)
 
 # --- Footer ---
-st.divider()
-st.markdown("<center>© 2026 HigherMarks | Quality Coaching by IITians & NITians</center>", unsafe_allow_html=True)
+st.markdown("<br><hr>", unsafe_allow_html=True)
+st.markdown("""
+<div style='text-align: center'>
+    <p><strong>HigherMarks Academic Center</strong></p>
+    <p style='font-size: 0.8em;'>© 2026 HigherMarks Education | Taught by IITians & NITians</p>
+</div>
+""", unsafe_allow_html=True)
