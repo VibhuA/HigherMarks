@@ -1,5 +1,5 @@
 import streamlit as st
-import pandas as pd  # Added the pandas import
+import pandas as pd
 import streamlit.components.v1 as components
 
 # Page Configuration
@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # --- Configuration: UPDATE THIS EMAIL ---
-your_email = "vibhuagarwal1998@gmail.com" 
+your_email = "your-email@gmail.com" 
 
 # --- Header Section ---
 st.markdown("# 📈 HigherMarks")
@@ -23,7 +23,7 @@ clarity delivered by India's finest engineering minds.
 
 st.divider()
 
-# --- The Pedigree Section ---
+# --- The Pedigree & Location Section ---
 col1, col2 = st.columns([2, 1])
 
 with col1:
@@ -33,14 +33,16 @@ with col1:
     st.write("- **Result Oriented:** Specialized focus on conceptual depth and board patterns.")
 
 with col2:
-    st.info("**Our Expertise** \n\n Our educators have cleared the toughest exams in the country. We know the path because we've walked it.")
+    st.markdown("### 📍 Our Location")
+    st.write("**Hiranandani Estate,**")
+    st.write("Thane (West), Maharashtra")
+    st.info("💡 **In-person & Online** sessions available.")
 
 st.divider()
 
 # --- Curriculum Section ---
 st.header("📚 Our Programs")
 
-# Creating three columns for a "Card" look
 card1, card2, card3 = st.columns(3)
 
 with card1:
@@ -73,7 +75,7 @@ contact_form_html = f"""
     <form action="https://formsubmit.co/{your_email}" method="POST">
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_template" value="table">
-        <input type="hidden" name="_subject" value="New HigherMarks Demo Request!">
+        <input type="hidden" name="_subject" value="New HigherMarks Demo Request - Thane">
         
         <div style="margin-bottom: 15px;">
             <label style="font-weight: bold; display: block; margin-bottom: 5px;">Student Name</label>
@@ -120,6 +122,7 @@ st.markdown("<br><hr>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center'>
     <p><strong>HigherMarks Academic Center</strong></p>
+    <p>📍 Hiranandani Estate, Thane, MH</p>
     <p style='font-size: 0.8em;'>© 2026 HigherMarks Education | Taught by IITians & NITians</p>
 </div>
 """, unsafe_allow_html=True)
