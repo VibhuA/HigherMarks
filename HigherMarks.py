@@ -64,7 +64,7 @@ with card3:
 st.divider()
 
 # --- Lead Generation Form Section ---
-st.header("📩 Book a Free Demo Session")
+st.header("📩 Get in touch")
 st.write("Submit the form below to connect with our IITian faculty.")
 
 # Optimized HTML Form for FormSubmit
