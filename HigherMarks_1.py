@@ -13,7 +13,7 @@ st.set_page_config(
 your_email = "your-email@gmail.com" 
 
 # --- Header Section ---
-st.markdown("<p style='font-size: 14px; line-height: 1.4;'# 📈 HigherMarks.</p>",unsafe_allow_html=True)
+st.markdown("<p style='font-size: 10px; line-height: 1.4;'# 📈 HigherMarks.</p>",unsafe_allow_html=True)
 st.subheader("Elevating Education with Mentors from IITs and NITs")
 st.write("""
 Welcome to **HigherMarks**, where we bridge the gap between classroom learning 
