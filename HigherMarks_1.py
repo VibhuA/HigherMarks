@@ -37,7 +37,7 @@ st.write("Submit the form below and check your email shortly.")
 
 # 1. DOUBLE CHECK THIS EMAIL
 # Make sure there are no typos!
-your_email = "your-email@gmail.com" 
+your_email = "vibhuagarwal1998@gmail.com" 
 
 # 2. Updated HTML Form (Optimized for Streamlit Components)
 contact_form_html = f"""
