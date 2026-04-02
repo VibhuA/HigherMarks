@@ -23,7 +23,7 @@ clarity delivered by India's finest engineering minds.
 
 st.divider()
 
-# --- The Pedigree & Location Section ---
+# --- The Pedigree Section ---
 col1, col2 = st.columns([2, 1])
 
 with col1:
@@ -33,10 +33,9 @@ with col1:
     st.write("- **Result Oriented:** Specialized focus on conceptual depth and board patterns.")
 
 with col2:
-    st.markdown("### 📍 Our Location")
-    st.write("**Hiranandani Estate,**")
-    st.write("Thane (West), Maharashtra")
-    st.info("💡 **In-person & Online** sessions available.")
+    st.markdown("### 💡 Our Expertise")
+    st.write("Our educators have cleared the toughest exams in the country. We know the path because we've walked it.")
+    st.info("📍 **Location:** \nHiranandani Estate, Thane")
 
 st.divider()
 
@@ -122,7 +121,7 @@ st.markdown("<br><hr>", unsafe_allow_html=True)
 st.markdown("""
 <div style='text-align: center'>
     <p><strong>HigherMarks Academic Center</strong></p>
-    <p>📍 Hiranandani Estate, Thane, MH</p>
+    <p>📍 Hiranandani Estate, Thane, Maharashtra</p>
     <p style='font-size: 0.8em;'>© 2026 HigherMarks Education | Taught by IITians & NITians</p>
 </div>
 """, unsafe_allow_html=True)
