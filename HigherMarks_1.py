@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # --- Configuration: UPDATE THIS EMAIL ---
-your_email = "your-email@gmail.com" 
+your_email = "vibhuagarwal1998@gmail.com" 
 
 # --- Header Section ---
 st.markdown("# 📈 HigherMarks")
